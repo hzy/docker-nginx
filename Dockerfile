@@ -1,5 +1,8 @@
-FROM nginx:1.9
-MAINTAINER Kyle Mathews "mathews.kyle@gmail.com"
+FROM node:6
+
+RUN echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list \
+&& echo "deb-src http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list
+RUN apt-get update && apt-get install nginx -y --force-yes
 
 RUN rm /etc/nginx/nginx.conf /etc/nginx/mime.types
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -15,4 +18,3 @@ COPY location /etc/nginx/location
 EXPOSE 80 443
 
 CMD ["nginx"]
-
